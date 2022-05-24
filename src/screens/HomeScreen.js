@@ -2,8 +2,10 @@ import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import PickerModel from "../components/PickerModel";
 
-export default function HomeScreen() {
+export default function HomeScreen(params) {
+  const navigation = params.navigation;
   return (
     <ImageBackground
       blurRadius={10}
@@ -12,14 +14,22 @@ export default function HomeScreen() {
     >
       <View>
         <View style={styles.menu}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.toggleDrawer();
+            }}
+          >
             <Entypo name="menu" size={30} color="black" />
           </TouchableOpacity>
           <Text style={styles.text}>E-BUS</Text>
         </View>
         <View style={styles.from}>
           <Text style={styles.text1}>From</Text>
-          <FontAwesome name="dot-circle-o" size={24} color="black" />
+          <PickerModel />
+        </View>
+        <View style={styles.from1}>
+          <Text style={styles.text1}>To</Text>
+          <PickerModel />
         </View>
       </View>
     </ImageBackground>
@@ -44,11 +54,15 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: 20,
-    paddingLeft: 30,
+    paddingLeft: 20,
   },
   from: {
-    marginLeft: 30,
-    marginTop: 100,
+    marginLeft: 10,
+    marginTop: 90,
+  },
+  from1: {
+    marginLeft: 10,
+    // marginTop: 5,
   },
   textContainer: {
     color: "orange",
